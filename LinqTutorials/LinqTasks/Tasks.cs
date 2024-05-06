@@ -19,7 +19,8 @@ public static partial class Tasks
     /// </summary>
     public static IEnumerable<Emp> Task1()
     {
-        return null;
+        return Emps
+            .Where(x => x.Job == "Backend programmer");
     }
 
     /// <summary>
@@ -27,7 +28,9 @@ public static partial class Tasks
     /// </summary>
     public static IEnumerable<Emp> Task2()
     {
-        return null;
+        return Emps
+            .Where(x => x.Job == "Frontend programmer" && x.Salary > 1000)
+            .OrderByDescending(x => x.Ename);
     }
 
 
@@ -36,7 +39,9 @@ public static partial class Tasks
     /// </summary>
     public static int Task3()
     {
-        return -1;
+        return Emps
+            .Max(x => x.Salary);
+
     }
 
     /// <summary>
@@ -44,7 +49,8 @@ public static partial class Tasks
     /// </summary>
     public static IEnumerable<Emp> Task4()
     {
-        return null;
+        return Emps
+            .Where(x => x.Salary == (Emps.Max(y => y.Salary)));
     }
 
     /// <summary>
@@ -62,7 +68,10 @@ public static partial class Tasks
     /// </summary>
     public static IEnumerable<object> Task6()
     {
-        return null;
+        var res = from t1 in Emps
+            join t2 in Depts on t1.Deptno equals t2.Deptno
+            select new { t1.Ename, t1.Job, t2.Dname };
+        return res;
     }
 
     /// <summary>
@@ -79,7 +88,15 @@ public static partial class Tasks
     /// </summary>
     public static bool Task8()
     { 
-        return false;
+        var x = Emps.Where(x => x.Job == "Backend programmer");
+        if (x is null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     /// <summary>
